@@ -24,7 +24,7 @@ class Player extends PIXI.Sprite {
     this.vy = 0;
 
     this.anchor.set(0.5);
-    this.scale.set(0.75);
+    this.scale.set(0.5);
     this.position.set(app.renderer.width / 2, app.renderer.height / 2);
 
     this.addMovement();
@@ -80,6 +80,12 @@ class Player extends PIXI.Sprite {
     keyA.press = () => {
       this.vx = -5;
       this.vy = 0;
+
+      if (egg) {
+        this.scale.x = -0.25;
+      } else {
+        this.scale.x = -0.5;
+      }
     };
     keyA.release = () => {
       if (!keyD.isDown && this.vy === 0) {
@@ -91,6 +97,12 @@ class Player extends PIXI.Sprite {
     keyD.press = () => {
       this.vx = 5;
       this.vy = 0;
+
+      if (egg) {
+        this.scale.x = 0.25;
+      } else {
+        this.scale.x = 0.5;
+      }
     };
     keyD.release = () => {
       if (!keyA.isDown && this.vy === 0) {
@@ -111,7 +123,7 @@ class Player extends PIXI.Sprite {
         this.scale.set(0.25);
         this.texture = easterEggTexture;
       } else {
-        this.scale.set(0.75);
+        this.scale.set(0.5);
         this.texture = originalTexture;
       }
     };
