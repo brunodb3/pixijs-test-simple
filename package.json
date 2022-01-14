@@ -2,7 +2,8 @@
   "name": "pixijs-test-simple",
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite"
+    "dev": "vite",
+    "build": "vite build"
   },
   "devDependencies": {
     "typescript": "^4.4.4",
