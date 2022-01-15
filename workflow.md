@@ -414,4 +414,8 @@ function setup() {
 
 At this point I did some polishing of the code, to make things a bit better, added a score counter (as a DOM element with a custom Google font) and some sound effects. You can see the final result on `main.ts`.
 
+I added a `classes` folder with files for each class (Audio, Player, Text). It's not a super complex structure, but it does help get some clutter off of `main.ts`. I also changed a bit the movement, allowing for diagonal movement. It's not perfect, but it's so much better being able to move diagonally :) I'm not going to highlight all the changes here, because you can just navigate the repository to see what the final version looks like.
+
 I also added an easter egg, can you find it? :)
+
+## Bruno Duarte Brito - January 2022
