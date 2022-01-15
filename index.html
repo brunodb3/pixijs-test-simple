@@ -10,28 +10,6 @@
         padding: 0;
         margin: 0;
       }
-
-      .text {
-        display: block;
-        position: absolute;
-        margin-left: 100px;
-        z-index: 1000;
-        color: white;
-        text-transform: uppercase;
-        font-family: "Mochiy Pop P One";
-        -webkit-text-stroke: 2px black;
-        visibility: hidden; /* start hidden while sprites load */
-      }
-
-      #score {
-        font-size: 34pt;
-        margin-top: 20px;
-      }
-
-      #tutorial {
-        font-size: 24pt;
-        margin-top: 80px;
-      }
     </style>
     <link
       href="https://fonts.googleapis.com/css?family=Mochiy%20Pop%20P%20One:300,400,700"
@@ -40,10 +18,7 @@
     />
   </head>
   <body>
-    <div id="app">
-      <h2 class="text" id="score">Score: 0</h2>
-      <p class="text" id="tutorial">Catch the star! Use WASD to move</p>
-    </div>
+    <div id="app"></div>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
