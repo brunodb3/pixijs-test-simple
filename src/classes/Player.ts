@@ -4,6 +4,7 @@ import Keyboard from "./Keyboard";
 export default class Player extends PIXI.Sprite {
   public vx: number;
   public vy: number;
+  public velocity: number;
 
   private egg: boolean = false;
   private app: PIXI.Application;
@@ -15,6 +16,7 @@ export default class Player extends PIXI.Sprite {
 
     this.vx = 0;
     this.vy = 0;
+    this.velocity = 5;
 
     this.app = app;
 
@@ -35,8 +37,8 @@ export default class Player extends PIXI.Sprite {
     const arrowLeft = new Keyboard("ArrowLeft");
     const arrowRight = new Keyboard("ArrowRight");
 
-    this.playerMovement(keyW, keyS, keyA, keyD);
-    this.playerMovement(arrowUp, arrowDown, arrowLeft, arrowRight);
+    this.addMovement(keyW, keyS, keyA, keyD);
+    this.addMovement(arrowUp, arrowDown, arrowLeft, arrowRight);
 
     this.easterEgg();
 
@@ -86,16 +88,14 @@ export default class Player extends PIXI.Sprite {
     };
   }
 
-  private playerMovement(
+  private addMovement(
     up: Keyboard,
     down: Keyboard,
     left: Keyboard,
     right: Keyboard
   ) {
-    const velocity = 5;
-
     up.press = () => {
-      this.vy = -velocity;
+      this.vy = -this.velocity;
     };
     up.release = () => {
       if (down.isUp) {
@@ -104,7 +104,7 @@ export default class Player extends PIXI.Sprite {
     };
 
     down.press = () => {
-      this.vy = velocity;
+      this.vy = this.velocity;
     };
     down.release = () => {
       if (up.isUp) {
@@ -113,7 +113,7 @@ export default class Player extends PIXI.Sprite {
     };
 
     left.press = () => {
-      this.vx = -velocity;
+      this.vx = -this.velocity;
       this.scale.x = 0 - Math.abs(this.scale.x);
     };
     left.release = () => {
@@ -123,7 +123,7 @@ export default class Player extends PIXI.Sprite {
     };
 
     right.press = () => {
-      this.vx = velocity;
+      this.vx = this.velocity;
       this.scale.x = 0 + Math.abs(this.scale.x);
     };
     right.release = () => {
@@ -131,5 +131,28 @@ export default class Player extends PIXI.Sprite {
         this.vx = 0;
       }
     };
+
+    const updateVelocity = () => {
+      if (up.isDown) this.vy = -this.velocity;
+      if (down.isDown) this.vy = this.velocity;
+      if (left.isDown) this.vx = -this.velocity;
+      if (right.isDown) this.vx = this.velocity;
+    };
+
+    // sprinting
+    const shiftLeft = new Keyboard("ShiftLeft");
+    shiftLeft.press = () => {
+      this.velocity = 10;
+      updateVelocity();
+    };
+
+    shiftLeft.release = () => {
+      this.velocity = 5;
+      updateVelocity();
+    };
+
+    const shiftRight = new Keyboard("ShiftRight");
+    shiftRight.press = shiftLeft.press;
+    shiftRight.release = shiftLeft.release;
   }
 }
